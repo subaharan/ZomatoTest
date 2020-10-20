@@ -17,4 +17,5 @@ class Strings{
   static const String delivery_not_available ='Delivery Not Available';
 
 
+
 }
