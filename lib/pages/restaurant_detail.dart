@@ -91,6 +91,7 @@ class _RestaurantDetailStatefull extends State<RestaurantDetail> {
                     )
                   ],
                 ),
+
                 Container(
                   margin: EdgeInsets.only(top: Util.px_5 * SizeConfig.heightMultiplier, left: Util.px_15 * SizeConfig.heightMultiplier),
                   child: RichText(
