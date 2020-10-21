@@ -76,17 +76,15 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                 animationController: _animationController,
               ),
               SizedBox(
-                height: Util.px_10 * SizeConfig.heightMultiplier,
+                height: Util.px_20 * SizeConfig.heightMultiplier,
               ),
               CollapsingListTile(
                 title: Strings.search,
                 icon: Icons.search,
                 animationController: _animationController,
               ),
-              /*      Divider(
-                color: Colors.grey,
-                height: Util.px_40 * SizeConfig.heightMultiplier,
-              ),*/
+              SizedBox(height: Util.px_40 * SizeConfig.heightMultiplier,),
+
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
