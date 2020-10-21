@@ -4,7 +4,7 @@ import 'package:zomato_test/common/strings.dart';
 import 'package:zomato_test/util/utils.dart';
 
 import '../ui/collapsing_list_tile.dart';
-import '../ui/theme.dart';
+import '../../util/theme.dart';
 import 'navigation_item.dart';
 
 class CollapsingNavigationDrawer extends StatefulWidget {
@@ -20,6 +20,7 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
   AnimationController _animationController;
   Animation<double> _withAnimation;
   int _currentIndexMenu = 0;
+  int mSelectedIndex=3;
 
   @override
   void initState() {
@@ -29,13 +30,18 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
 
     _withAnimation =
-        Tween(begin: _maxWidth, end: _minWidth).animate(_animationController);
+        Tween(begin: _minWidth, end: _minWidth).animate(_animationController);
     initiate();
   }
 
   void initiate() {
     setState(() {
-      _isCollapsed=true;
+      Future.delayed(const Duration(milliseconds: 350), () {
+        setState(() async {
+          _isCollapsed=true;
+        });
+      });
+
     });
   }
 
@@ -52,9 +58,11 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
       color: Colors.transparent,
       elevation: 80,
       child: Container(
+        width: Util.px_45 * SizeConfig.heightMultiplier,
         decoration: _drawerWhiteBackground(),
         child: Container(
-          width: _withAnimation.value,
+          // width: _withAnimation.value,
+          width: Util.px_45 * SizeConfig.heightMultiplier,
           decoration: _drawerBackground(),
           // color: drawerBackgroundColor,
           child: Column(
@@ -68,26 +76,36 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                 animationController: _animationController,
               ),
               SizedBox(
-                height: Util.px_10 * SizeConfig.heightMultiplier,
+                height: Util.px_20 * SizeConfig.heightMultiplier,
               ),
               CollapsingListTile(
                 title: Strings.search,
                 icon: Icons.search,
                 animationController: _animationController,
               ),
-              /*      Divider(
-                color: Colors.grey,
-                height: Util.px_40 * SizeConfig.heightMultiplier,
-              ),*/
+              SizedBox(height: Util.px_40 * SizeConfig.heightMultiplier,),
+
               Expanded(
-                child: ListView.separated(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+
+                    _verticalTextWidget(0),
+                    _verticalTextWidget(1),
+                    _verticalTextWidget(2),
+                    _verticalTextWidget(3),
+
+                  ],
+                ) /*ListView.separated(
+
                   separatorBuilder: (context, index) {
                     return SizedBox(
                       height: Util.px_10 * SizeConfig.heightMultiplier,
                     );
                   },
                   itemBuilder: (context, index) {
-                    return CollapsingListTile(
+                    return _verticalTextWidget(navigationItems[index].title);
+                    *//*return CollapsingListTile(
                       title: navigationItems[index].title,
                       icon: navigationItems[index].icon,
                       animationController: _animationController,
@@ -97,11 +115,12 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                           _currentIndexMenu = index;
                         });
                       },
-                    );
+                    );*//*
                   },
                   itemCount: navigationItems.length,
-                ),
+                ),*/
               ),
+              SizedBox(height: Util.px_40 * SizeConfig.heightMultiplier,),
               InkWell(
                 onTap: () {
                   setState(() {
@@ -113,18 +132,54 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                         : _animationController.reverse();
                   });
                 },
-                child: AnimatedIcon(
+                child: Icon(Icons.content_paste, color: Colors.black,
+                  size: Util.px_24 * SizeConfig.heightMultiplier,),
+               /* child: AnimatedIcon(
                   icon: AnimatedIcons.close_menu,
                   progress: _animationController,
                   color: Colors.black,
                   size: Util.px_24 * SizeConfig.heightMultiplier,
-                ),
+                ),*/
               ),
               SizedBox(
                 height: Util.px_40 * SizeConfig.heightMultiplier,
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+/*
+  Widget _verticalTextWidget(int i){
+    return RaisedButton(
+      co
+      onPressed: (){
+        setState(() {
+          mSelectedIndex=i;
+        });
+      },
+      child: RotatedBox(
+        quarterTurns: -1,
+        child: Text(navigationItems[i].title,
+          style: mSelectedIndex==i?selectedMenuTextStyle:menuTextStyle,),
+      ),
+    );
+  }*/
+  Widget _verticalTextWidget(int i){
+    return GestureDetector(
+      onTap: (){
+        setState(() {
+          mSelectedIndex=i;
+        });
+      },
+      child: Container(
+        padding: EdgeInsets.all(Util.px_5 * SizeConfig.heightMultiplier),
+       alignment: Alignment.center,
+        child: RotatedBox(
+          quarterTurns: -1,
+          child: Text(navigationItems[i].title,
+          style: mSelectedIndex==i?selectedMenuTextStyle:menuTextStyle,),
         ),
       ),
     );

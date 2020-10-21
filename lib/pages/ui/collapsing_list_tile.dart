@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zomato_test/common/size_config.dart';
 import 'package:zomato_test/util/utils.dart';
-import '../ui/theme.dart';
+import '../../util/theme.dart';
 
 class CollapsingListTile extends StatefulWidget {
   final String title;
@@ -59,7 +59,7 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
               color: widget.isSelected ? selectedColor : Colors.black,
               size: Util.px_24 * SizeConfig.heightMultiplier,
             ),
-            SizedBox(
+           /* SizedBox(
               width: sizedBoxAnimation.value,
             ),
             (widthAnimation.value >= Util.px_250 * SizeConfig.heightMultiplier)
@@ -67,7 +67,7 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
                     widget.title,
                     style: listTitleDefaultTextStyle,
                   )
-                : Text("")
+                : Text("")*/
           ],
         ),
       ),

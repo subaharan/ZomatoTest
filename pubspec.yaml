@@ -53,6 +53,22 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  fonts:
+    - family: BananaYeti
+      fonts:
+        - asset: fonts/BananaYeti-ExtraBold.ttf
+
+    - family: ProximaNova
+      fonts:
+        - asset: fonts/proximanova-regular.otf
+
+    - family: Gibson
+      fonts:
+        - asset: fonts/Gibson-Regular.ttf
+
+    - family: Times
+      fonts:
+        - asset: fonts/Times-New-Roman-400.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
