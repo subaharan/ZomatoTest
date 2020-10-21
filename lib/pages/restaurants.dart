@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:location_permissions/location_permissions.dart';
 
 import 'package:path/path.dart' as p;
+import 'package:url_launcher/url_launcher.dart';
 import 'package:zomato_test/common/app_colors.dart';
 import 'package:zomato_test/common/size_config.dart';
 import 'package:zomato_test/common/strings.dart';
@@ -368,18 +369,23 @@ class _RestaurantsStatefull extends State<Restaurants> {
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Container(
-            margin: EdgeInsets.only(right: Util.px_15 * SizeConfig.heightMultiplier, top: Util.px_15 * SizeConfig.heightMultiplier),
-            decoration: _viewButtonBackground(),
-            padding: EdgeInsets.only(left: Util.px_25 * SizeConfig.heightMultiplier, right: Util.px_25 * SizeConfig.heightMultiplier,
-            top: Util.px_10 * SizeConfig.heightMultiplier, bottom: Util.px_10 * SizeConfig.heightMultiplier),
-            child: Text(
-              Strings.view_all,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: Util.px_20 * SizeConfig.textMultiplier,
-                fontFamily: 'Roboto',
+          GestureDetector(
+            onTap: (){
+              _launchInWebViewWithJavaScript(mRestaurantList[0].url);
+            },
+            child: Container(
+              margin: EdgeInsets.only(right: Util.px_15 * SizeConfig.heightMultiplier, top: Util.px_15 * SizeConfig.heightMultiplier),
+              decoration: _viewButtonBackground(),
+              padding: EdgeInsets.only(left: Util.px_25 * SizeConfig.heightMultiplier, right: Util.px_25 * SizeConfig.heightMultiplier,
+              top: Util.px_10 * SizeConfig.heightMultiplier, bottom: Util.px_10 * SizeConfig.heightMultiplier),
+              child: Text(
+                Strings.view_all,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: Util.px_20 * SizeConfig.textMultiplier,
+                  fontFamily: 'Roboto',
+                ),
               ),
             ),
           ),
@@ -434,6 +440,21 @@ class _RestaurantsStatefull extends State<Restaurants> {
         ],
       ),
     );
+  }
+
+
+  //-------------
+  Future<void> _launchInWebViewWithJavaScript(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: true,
+        forceWebView: true,
+        enableJavaScript: true,
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   //---------------
