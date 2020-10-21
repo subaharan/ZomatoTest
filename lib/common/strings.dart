@@ -15,6 +15,12 @@ class Strings{
   static const String cuisines ='Cuisines';
   static const String delivery_available ='Delivery Available';
   static const String delivery_not_available ='Delivery Not Available';
+  static const String dashboard ='Dashboard';
+  static const String search ='Search';
+  static const String my_profile ='My Profile';
+  static const String notifications ='Notifications';
+  static const String invoice ='Invoice';
+  static const String home ='Home';
 
 
 
