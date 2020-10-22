@@ -60,88 +60,89 @@ class _HomePageState extends State<HomePage>
     _tabController.addListener(_setActiveTabIndex);
   }
 
-
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-
-      body: Stack(
-        children: [
-          categoryList.length == 0
-              ? new Container(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          )
-              : Padding(
-                padding: EdgeInsets.only(left: Util.px_50 * SizeConfig.heightMultiplier),
-                child: DefaultTabController(
-
-            length: categoryList.length,
-            child: NestedScrollView(
-                headerSliverBuilder: (context, value) {
-                  return [
-                    SliverToBoxAdapter(
-                      child: Container(
-                        margin: EdgeInsets.only(
-                            top: Util.px_60 * SizeConfig.heightMultiplier,
-                            left: Util.px_20 * SizeConfig.heightMultiplier),
-                        child: Text(
-                          Strings.food_delivery,
-                          style: TextStyle(
-                            color: AppColor.ff253851,
-                            fontWeight: FontWeight.normal,
-                            fontSize: Util.px_20 * SizeConfig.textMultiplier,
-                            fontFamily: 'Roboto',
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+        backgroundColor: Colors.white,
+        body: Row(
+          children: [
+            CollapsingNavigationDrawer(),
+            categoryList.length == 0
+                ? Expanded(
+                    child: new Container(
+                      child: Center(
+                        child: CircularProgressIndicator(),
                       ),
                     ),
-                    SliverAppBar(
-                      backgroundColor: Colors.white,
-                      // expandedHeight: Util.px_300 * SizeConfig.heightMultiplier,
-                      pinned: true,
-                      automaticallyImplyLeading: false,
-                      flexibleSpace: SafeArea(
-                        child: TabBar(
-                          labelColor: Colors.black,
-                          indicatorColor: Colors.transparent,
-                          isScrollable: true,
-                          unselectedLabelColor: Colors.grey,
-                          controller: _tabController,
-                          tabs: [
-                            for (int i = 0; i < categoryList.length; i++)
-                              Tab(
-                                /*text: categoryList[i].name,*/
-                                child: _tabController.index == i
-                                    ? _itemSelected(i)
-                                    : _itemUnSelected(i),
+                  )
+                : Expanded(
+                    child: DefaultTabController(
+                      length: categoryList.length,
+                      child: NestedScrollView(
+                        headerSliverBuilder: (context, value) {
+                          return [
+                            SliverToBoxAdapter(
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                    top: Util.px_60 *
+                                        SizeConfig.heightMultiplier,
+                                    left: Util.px_20 *
+                                        SizeConfig.heightMultiplier),
+                                child: Text(
+                                  Strings.food_delivery,
+                                  style: TextStyle(
+                                    color: AppColor.ff253851,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize:
+                                        Util.px_20 * SizeConfig.textMultiplier,
+                                    fontFamily: 'Roboto',
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
+                            ),
+                            SliverAppBar(
+                              backgroundColor: Colors.white,
+                              // expandedHeight: Util.px_300 * SizeConfig.heightMultiplier,
+                              pinned: true,
+                              automaticallyImplyLeading: false,
+                              flexibleSpace: SafeArea(
+                                child: TabBar(
+                                  labelColor: Colors.black,
+                                  indicatorColor: Colors.transparent,
+                                  isScrollable: true,
+                                  unselectedLabelColor: Colors.grey,
+                                  controller: _tabController,
+                                  tabs: [
+                                    for (int i = 0;
+                                        i < categoryList.length;
+                                        i++)
+                                      Tab(
+                                        /*text: categoryList[i].name,*/
+                                        child: _tabController.index == i
+                                            ? _itemSelected(i)
+                                            : _itemUnSelected(i),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ];
+                        },
+                        body: TabBarView(
+                          controller: _tabController,
+                          children: [
+                            for (int i = 0; i < categoryList.length; i++)
+                              Restaurants(),
                           ],
                         ),
                       ),
                     ),
-                  ];
-                },
-                body: TabBarView(
-                  controller: _tabController,
-                  children: [
-                    for (int i = 0; i < categoryList.length; i++) Restaurants(),
-                  ],
-                ),
-            ),
-          ),
-              ),
-          CollapsingNavigationDrawer()
-        ],
-      )
-    );
+                  ),
+          ],
+        ));
   }
-
 
   //------------------
   Widget _itemSelected(int index) {

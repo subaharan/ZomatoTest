@@ -168,10 +168,9 @@ class _RestaurantsStatefull extends State<Restaurants> {
           child: mRestaurantList == null
               ? Container()
               : Container(
-                  padding: EdgeInsets.only(
-                      left: Util.px_20 * SizeConfig.heightMultiplier),
                   height: Util.px_420 * SizeConfig.imageSizeMultiplier,
                   child: ListView.builder(
+                    padding: EdgeInsets.only(left: Util.px_20  *SizeConfig.heightMultiplier),
                     controller: _controller,
                     scrollDirection: Axis.horizontal,
                     itemCount: mRestaurantList.length,
@@ -190,10 +189,9 @@ class _RestaurantsStatefull extends State<Restaurants> {
                   ),
                 )
               : Container(
-                  padding: EdgeInsets.only(
-                      left: Util.px_20 * SizeConfig.heightMultiplier),
                   height: Util.px_420 * SizeConfig.imageSizeMultiplier,
                   child: ListView.builder(
+                    padding: EdgeInsets.only(left: Util.px_20  *SizeConfig.heightMultiplier),
                     controller: _popularController,
                     scrollDirection: Axis.horizontal,
                     itemCount: mPopularRestaurantList.length,

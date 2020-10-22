@@ -40,6 +40,7 @@ dependencies:
   url_launcher: ^5.7.5
   webview_flutter: ^1.0.3
   flutter_rating_bar: ^3.0.1+1
+  shape_of_view: ^1.0.2
 #  permission:
 #    git:
 #      url: https://github.com/devadrianapostol/permission
@@ -74,7 +75,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  assets:
+    - assets/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
